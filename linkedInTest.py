@@ -285,70 +285,88 @@ if __name__ == "__main__":
         linkedin_acc = "Ngoc Ha"
     
     print("Starting the scraping...")
-    time.sleep(6)
-    titleInputElement = driver.find_element(By.CSS_SELECTOR, "[data-testid='typeahead-input']")
-    titleInputElement.clear()
-    time.sleep(2)
-    titleInputElement.send_keys("hiring .Net developer Malaysia")
-    time.sleep(4)
-    all_res_drop = driver.find_element(By.CSS_SELECTOR, "[data-testid='lazy-column']")
-    search_btn = all_res_drop.find_elements(By.CSS_SELECTOR, "[role='option']")
-    print(len(search_btn))
-    search_btn[-1].click()
-    time.sleep(5)
-    filter_bar = driver.find_element(By.CSS_SELECTOR, "[componentkey='SearchResults_SearchResultsFilterBar']")
-    filter_options = filter_bar.find_elements(By.CSS_SELECTOR, "[role='radio']")
-    time.sleep(2)
-    for filter_option in filter_options:
-        if(filter_option.text.lower() == 'posts'):
-            filter_option.click()
+    count_job = 1
+    current_job = ""
+    current_coutry = ""
+    for job_name in jobs_names: 
+        if(count_job > 1):
+            x = random.randint(300,1000)
+            time.sleep(x)
+        country_count = 1
+        if(count_job == 1):
             time.sleep(5)
-            break
-    filter_bar = driver.find_element(By.CSS_SELECTOR, "[componentkey='SearchResults_SearchResultsFilterBar']")
-    filter_options = filter_bar.find_elements(By.CSS_SELECTOR, "[role='button']")
-    for filter_option in filter_options:
-        if(filter_option.text.lower() == 'date posted'):
-            filter_option.click()
-            time.sleep(3) 
-            date_post_filter = driver.find_elements(By.CSS_SELECTOR, "[data-component-type='LazyColumn']")[-1]
-            date_post_filter_options = date_post_filter.find_elements(By.CSS_SELECTOR, "[role='radio']")
-            for date_post_filter_option in date_post_filter_options:
-                if(date_post_filter_option.text.lower() == 'past 24 hours'):
-                    date_post_filter_option.click()
-                    time.sleep(3)
-                    show_result = driver.find_element(By.CLASS_NAME,"_7bf43e04")
-                    element = driver.find_element(By.LINK_TEXT, "Show results")
-                    element.click()
-                    time.sleep(10)         
-                    break
-            break
-    filter_bar = driver.find_element(By.CSS_SELECTOR, "[componentkey='SearchResults_SearchResultsFilterBar']")
-    filter_options = filter_bar.find_elements(By.CSS_SELECTOR, "[role='button']")
-    for filter_option in filter_options:
-        if(filter_option.text.lower() == 'sort by'):
-            filter_option.click()
-            time.sleep(3) 
-            date_post_filter = driver.find_elements(By.CSS_SELECTOR, "[data-component-type='LazyColumn']")[-1]
-            date_post_filter_options = date_post_filter.find_elements(By.CSS_SELECTOR, "[role='radio']")
-            for date_post_filter_option in date_post_filter_options:
-                if(date_post_filter_option.text.lower() == 'latest'):
-                    date_post_filter_option.click()
-                    time.sleep(3)
-                    show_result = driver.find_element(By.CLASS_NAME,"_7bf43e04")
-                    element = driver.find_element(By.LINK_TEXT, "Show results")
-                    element.click()
-                    time.sleep(10)         
-                    break
-            break
+        for country in countries:
+            if(country_count > 1):
+                x = random.randint(100,400)
+                time.sleep(x) 
     
-    res_list = driver.find_element(By.CSS_SELECTOR, "[data-testid='lazy-column']")    
-    res_items = res_list.find_elements(By.CSS_SELECTOR, "[role='listitem']")
-    access_token = login_crm()
-    for res_item in res_items:
-        person_link = res_item.find_element(By.CLASS_NAME,"_5674eabd").get_attribute("href")
-        if("linkedin.com/in" in person_link):
-            proceed_without_autoAction(driver,person_link,access_token, "Malaysia",linkedin_acc)
-        else:
-            continue
+        time.sleep(6)
+        titleInputElement = driver.find_element(By.CSS_SELECTOR, "[data-testid='typeahead-input']")
+        titleInputElement.clear()
+        time.sleep(2)
+        titleInputElement.send_keys("hiring " +  job_name + " " +  country)
+        time.sleep(4)
+        all_res_drop = driver.find_element(By.CSS_SELECTOR, "[data-testid='lazy-column']")
+        search_btn = all_res_drop.find_elements(By.CSS_SELECTOR, "[role='option']")
+        print(len(search_btn))
+        search_btn[-1].click()
+        time.sleep(5)
+        filter_bar = driver.find_element(By.CSS_SELECTOR, "[componentkey='SearchResults_SearchResultsFilterBar']")
+        filter_options = filter_bar.find_elements(By.CSS_SELECTOR, "[role='radio']")
+        time.sleep(2)
+        for filter_option in filter_options:
+            if(filter_option.text.lower() == 'posts'):
+                filter_option.click()
+                time.sleep(5)
+                break
+        filter_bar = driver.find_element(By.CSS_SELECTOR, "[componentkey='SearchResults_SearchResultsFilterBar']")
+        filter_options = filter_bar.find_elements(By.CSS_SELECTOR, "[role='button']")
+        for filter_option in filter_options:
+            if(filter_option.text.lower() == 'date posted'):
+                filter_option.click()
+                time.sleep(3) 
+                date_post_filter = driver.find_elements(By.CSS_SELECTOR, "[data-component-type='LazyColumn']")[-1]
+                date_post_filter_options = date_post_filter.find_elements(By.CSS_SELECTOR, "[role='radio']")
+                for date_post_filter_option in date_post_filter_options:
+                    if(date_post_filter_option.text.lower() == 'past 24 hours'):
+                        date_post_filter_option.click()
+                        time.sleep(3)
+                        show_result = driver.find_element(By.CLASS_NAME,"_7bf43e04")
+                        element = driver.find_element(By.LINK_TEXT, "Show results")
+                        element.click()
+                        time.sleep(10)         
+                        break
+                break
+        filter_bar = driver.find_element(By.CSS_SELECTOR, "[componentkey='SearchResults_SearchResultsFilterBar']")
+        filter_options = filter_bar.find_elements(By.CSS_SELECTOR, "[role='button']")
+        for filter_option in filter_options:
+            if(filter_option.text.lower() == 'sort by'):
+                filter_option.click()
+                time.sleep(3) 
+                date_post_filter = driver.find_elements(By.CSS_SELECTOR, "[data-component-type='LazyColumn']")[-1]
+                date_post_filter_options = date_post_filter.find_elements(By.CSS_SELECTOR, "[role='radio']")
+                for date_post_filter_option in date_post_filter_options:
+                    if(date_post_filter_option.text.lower() == 'latest'):
+                        date_post_filter_option.click()
+                        time.sleep(3)
+                        show_result = driver.find_element(By.CLASS_NAME,"_7bf43e04")
+                        element = driver.find_element(By.LINK_TEXT, "Show results")
+                        element.click()
+                        time.sleep(10)         
+                        break
+                break
+    
+        res_list = driver.find_element(By.CSS_SELECTOR, "[data-testid='lazy-column']")    
+        res_items = res_list.find_elements(By.CSS_SELECTOR, "[role='listitem']")
+        access_token = login_crm()
+        for res_item in res_items:
+            person_link = res_item.find_element(By.CLASS_NAME,"_5674eabd").get_attribute("href")
+            if("linkedin.com/in" in person_link):
+                proceed_without_autoAction(driver,person_link,access_token, country,linkedin_acc)
+            else:
+                continue
+            
+            country_count = country_count + 1
+            count_job = count_job + 1
          
     
