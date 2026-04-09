@@ -1032,7 +1032,7 @@ def proceed_without_autoAction(driver,person_link,access_token, country, linkedi
 		edit_contact(access_token = access_token, contact_id = contact_info["data"] , title = hirer_title, name = hirer_name, email = hirer_email, phone= hirer_phone, des = request_note_str, link = contact_info_link, account_id= "")
 
 	if (lead_id == ""):
-		add_new_lead(access_token=access_token, company_name="from post", company_id = "",title="from post",address=country,other_address=country,phone_company="",hirer_phone = hirer_phone,hirer_email = hirer_email,website= person_link,content="Đã gửi connect request",assigned_user_id="1", lead_status = "Recycle", job_phone = "", hirer_name = hirer_name, refer= "", contact_id = contact_id, status_des = "message sent by AdminAccount")
+		add_new_lead(access_token=access_token, company_name="from post", company_id = "",title="from post",address=country,other_address=country,phone_company="",hirer_phone = hirer_phone,hirer_email = hirer_email,website= person_link,content="Đã gửi connect request",assigned_user_id="1", lead_status = "Recycled", job_phone = "", hirer_name = hirer_name, refer= "", contact_id = contact_id, status_des = "message sent by AdminAccount")
   
 	else:
 		if(lead_info["status"] != "Assigned" and lead_info["status"] != "Converted" and lead_info["status"] != "In Process" and lead_info["status"] != "Dead" and lead_info["status"] != "Response" ):
