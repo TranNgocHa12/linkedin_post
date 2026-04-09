@@ -943,7 +943,7 @@ def proceed_without_autoAction(driver,person_link,access_token, country, linkedi
 	hirer_title = ""
 	hirer_email = ""
 	hirer_phone = ""
-	hirer_name = driver.find_element(By.CLASS_NAME,"_9ad4cc6e").text
+	hirer_name = driver.find_element(By.CLASS_NAME,"_8c2ade1d").text
 	lead_info = check_lead_existed("from post", "from post", hirer_name)
 	lead_id = lead_info["data"]
 	hirer_name_split = hirer_name.split()
@@ -954,7 +954,7 @@ def proceed_without_autoAction(driver,person_link,access_token, country, linkedi
 		hirer_name_first_name = hirer_name_split[ii]
 	contact_info = check_contact(hirer_name)
 	if(contact_info["data"] == ""):
-		contact_info_link = driver.find_element(By.CLASS_NAME,"_4dcef7e2").get_attribute("href")
+		contact_info_link = driver.find_element(By.CLASS_NAME,"f0df7486").get_attribute("href")
 		#contact_info_link = driver.find_element(By.ID,"top-card-text-details-contact-info").get_attribute("href")
 		driver.get(contact_info_link)
 		time.sleep(3)
@@ -999,7 +999,7 @@ def proceed_without_autoAction(driver,person_link,access_token, country, linkedi
 			return	
 		elif contact_info["des"] is not None:
 			request_note_str =contact_info["des"] + "\nconnect by Huong" 
-		contact_info_link = driver.find_element(By.CLASS_NAME,"_4dcef7e2").get_attribute("href")
+		contact_info_link = driver.find_element(By.CLASS_NAME,"f0df7486").get_attribute("href")
 		#contact_info_link = driver.find_element(By.ID,"top-card-text-details-contact-info").get_attribute("href")
 		driver.get(contact_info_link)
 		time.sleep(3)
