@@ -233,7 +233,7 @@ if __name__ == "__main__":
     #               "Php developer", "C++","Azure developer"]
     jobs_names =[".Net developer"]
     #countries = ["Malaysia","Australia and New Zealand","Germany","European Union", "Thailand","Singapore","United States","United Kingdom"]
-    countries = ["Australia and New Zealand","Germany","European Union", "Thailand","Singapore","United States","United Kingdom"]
+    countries = ["Malaysia","Australia and New Zealand","Germany","European Union", "Thailand","Singapore","United States","United Kingdom"]
     # jobfile = open("job.txt", "r")
     # jobs_names = jobfile.read().split(",")
     # jobfile.close()
@@ -329,10 +329,10 @@ if __name__ == "__main__":
                     date_post_filter = driver.find_elements(By.CSS_SELECTOR, "[data-component-type='LazyColumn']")[-1]
                     date_post_filter_options = date_post_filter.find_elements(By.CSS_SELECTOR, "[role='radio']")
                     for date_post_filter_option in date_post_filter_options:
-                        if(date_post_filter_option.text.lower() == 'past 24 hours'):
+                        if(date_post_filter_option.text.lower() == 'past week'):
                             date_post_filter_option.click()
                             time.sleep(3)
-                            show_result = driver.find_element(By.CLASS_NAME,"d18e0e3a")
+                            show_result = driver.find_element(By.CLASS_NAME,"b2ea38ed")
                             element = driver.find_element(By.LINK_TEXT, "Show results")
                             element.click()
                             time.sleep(10)         
@@ -350,18 +350,35 @@ if __name__ == "__main__":
                         if(date_post_filter_option.text.lower() == 'latest'):
                             date_post_filter_option.click()
                             time.sleep(3)
-                            show_result = driver.find_element(By.CLASS_NAME,"d18e0e3a")
+                            show_result = driver.find_element(By.CLASS_NAME,"b2ea38ed")
                             element = driver.find_element(By.LINK_TEXT, "Show results")
                             element.click()
                             time.sleep(10)         
                             break
                     break
-    
+            # filter_bar = driver.find_element(By.CSS_SELECTOR, "[componentkey='SearchResults_SearchResultsFilterBar']")
+            # filter_options = filter_bar.find_elements(By.CSS_SELECTOR, "[role='button']")
+            # for filter_option in filter_options:
+            #     if(filter_option.text.lower() == 'content type'):
+            #         filter_option.click()
+            #         time.sleep(3) 
+            #         date_post_filter = driver.find_elements(By.CSS_SELECTOR, "[data-component-type='LazyColumn']")[-1]
+            #         date_post_filter_options = date_post_filter.find_elements(By.CSS_SELECTOR, "[role='radio']")
+            #         for date_post_filter_option in date_post_filter_options:
+            #             if(date_post_filter_option.text.lower() == 'job posts'):
+            #                 date_post_filter_option.click()
+            #                 time.sleep(3)
+            #                 show_result = driver.find_element(By.CLASS_NAME,"dd7ed699")
+            #                 element = driver.find_element(By.LINK_TEXT, "Show results")
+            #                 element.click()
+            #                 time.sleep(10)         
+            #                 break
+            #         break
             res_list = driver.find_element(By.CSS_SELECTOR, "[data-testid='lazy-column']")    
             res_items = res_list.find_elements(By.CSS_SELECTOR, "[role='listitem']")
             access_token = login_crm()
             for res_item in res_items:
-                person_link = res_item.find_element(By.CLASS_NAME,"b6f047e7").get_attribute("href")
+                person_link = res_item.find_element(By.CLASS_NAME,"aa73a1a4").get_attribute("href")
                 if("linkedin.com/in" in person_link):
                     proceed_without_autoAction(driver,person_link,access_token, country,linkedin_acc)
                 else:
